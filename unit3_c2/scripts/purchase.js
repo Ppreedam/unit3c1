@@ -1,8 +1,8 @@
-let add=JSON.parse(localStorage.getItem("amount"))
+// let add=JSON.parse(localStorage.getItem("amount"))
 
 
-let wallet=document.getElementById("wallet")
-wallet.innerText=add
+// let wallet=document.getElementById("wallet")
+// wallet.innerText=add
 
 let data= JSON.parse(localStorage.getItem("purchase")) || []
 
@@ -22,3 +22,22 @@ data.map(function(el){
 div.append(img, name ,price)
 x.append(div)
 })
+
+let data2=JSON.parse(localStorage.getItem("user")) || []
+
+  var total = data2.reduce(function (sum, elem, index, arr) {
+    
+    return sum + Number(elem.amount);
+    
+  }, 0);
+  let data1=JSON.parse(localStorage.getItem("purchase")) || []
+
+  data1.map(function(el){
+    let x=(el.price)
+    total=total-x
+    console.log(x)
+    console.log(total)
+    
+  })
+  document.getElementById("wallet_balance").append(total)
+

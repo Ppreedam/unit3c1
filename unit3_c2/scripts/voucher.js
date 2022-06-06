@@ -1,25 +1,29 @@
-let add=JSON.parse(localStorage.getItem("amount"))
+let data=JSON.parse(localStorage.getItem("user")) || []
 
+  var total = data.reduce(function (sum, elem, index, arr) {
+    
+    return sum + Number(elem.amount);
+    
+  }, 0);
 
-let wallet=document.getElementById("wallet")
-wallet.innerText=add
+  //console.log(total);
 
-function addmoney(){
-  event.preventDefault()
-  let money=document.getElementById("amount").value;
-  let x= add + Number(money)
-  //console.log(x)
-  wallet.innerText=x
-  localStorage.setItem("amount",x)
-  window.location.reload()
-
-
-  //**********api******************
-
+  //******************if else */
+  
   
 
+  // let data1=JSON.parse(localStorage.getItem("purchase")) || []
 
-}
+  // data1.map(function(el){
+  //   let x=(el.price)
+  //   console.log(x)
+  //   if(x<=total)
+  //   {
+  //     c("you can purchase")
+  //   }
+  // })
+
+
 
 const url=" https://masai-vouchers-api.herokuapp.com/api/vouchers"
 
@@ -71,6 +75,27 @@ const url=" https://masai-vouchers-api.herokuapp.com/api/vouchers"
       arr1.push(el)
       localStorage.setItem("purchase",JSON.stringify(arr1))
 
-      window.location.reload()
+       window.location.reload()
     }
   }
+  let data1=JSON.parse(localStorage.getItem("purchase")) || []
+
+  data1.map(function(el){
+    let x=(el.price)
+    total=total-x
+    console.log(x)
+    console.log(total)
+    if(x<=total)
+    {
+      alert("Hurray! purchase successful")
+    }
+    else{
+      alert("Sorry! insufficient balance")
+    }
+    
+  })
+  
+  document.getElementById("wallet_balance").append(total)
+
+
+  
